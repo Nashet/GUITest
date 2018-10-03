@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -48,5 +49,17 @@ public class ModalWindow : Hideable, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         isMouseInside = false;
+    }
+
+    public void OnBigTextTest()
+    {
+        var sb = new StringBuilder();
+        for (int i = 0; i < 90; i++)
+        {
+            sb.Append("Testing long text ");
+        }
+
+        generalText.text = sb.ToString();
+
     }
 }
