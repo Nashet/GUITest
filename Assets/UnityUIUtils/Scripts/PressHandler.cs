@@ -1,27 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Nashet.UnityUIUtils
 {
     /// <summary>
     /// Allows opening URL
     /// </summary>
-    public class PressHandler : MonoBehaviour, IPointerDownHandler
+    [RequireComponent(typeof(Button))]
+    public class PressHandler : MonoBehaviour
     {
         [SerializeField]
         private string url;
 
-        private readonly UnityEvent OnPress = new UnityEvent();
-
         private void Start()
-        {
-            OnPress.AddListener(() => { Application.OpenURL(url); });
-        }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            OnPress.Invoke();
+        {            
+            var button = GetComponent<Button>();
+            button.onClick.AddListener(() => { Application.OpenURL(url); });
         }
     }
 }

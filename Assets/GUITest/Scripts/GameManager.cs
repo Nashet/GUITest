@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using Nashet.UnityUIUtils;
+using UnityEngine;
 namespace GUITest
 {
     /// <summary>
-    /// Loads prefabs
+    /// Stores and loads prefabs
     /// </summary>
     public class GameManager : MonoBehaviour
     {
-        [Header("You can use another prefab with another style")]
+        [Header("You can use select prefab with another style (before scene running)")]
         [SerializeField] protected GameObject modalWindowPrefab;
         [SerializeField] protected Canvas canvas;
 
