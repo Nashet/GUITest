@@ -14,28 +14,31 @@ public class ModalWindow : Hideable, IPointerEnterHandler, IPointerExitHandler
     [SerializeField]
     protected Text generalText;
 
+    public static ModalWindow Instance { get; protected set; }
     protected bool isMouseInside;
-    public static bool IsInstanciated { get; protected set; }
-    
     
     protected void Start ()
-    {
-        IsInstanciated = true;
+    {    
+        Instance = this;        
+        //todo add check for multiple objects with that script
     }
 
-    internal void Set(string text)
+    /// <summary>
+    /// Overwrites previous modal window if it was open
+    /// </summary>    
+    internal static void Show(string text)
     {
-        generalText.text = text;
+        Instance.generalText.text = text;
+        Instance.Show();
     }
 
     // Update is called once per frame
     protected void Update ()
     {
+        // close if clicked outside
         if (Input.GetMouseButtonUp(0) && !isMouseInside)
             Hide();
-    }
-
-    
+    }    
 
     public void OnPointerEnter(PointerEventData eventData)
     {
