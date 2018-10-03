@@ -7,7 +7,7 @@ namespace GUITest
     /// </summary>
     public class GameManager : MonoBehaviour
     {
-        [Header("You can use select prefab with another style (before scene running)")]
+        [Header("You can select prefab with another style (before scene running)")]
         [SerializeField] protected GameObject modalWindowPrefab;
         [SerializeField] protected Canvas canvas;
 
