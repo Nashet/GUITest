@@ -1,7 +1,4 @@
-﻿using Nashet.UnityUIUtils;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using System.Text;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,11 +15,13 @@ namespace Nashet.UnityUIUtils
 
         public static ModalWindow Instance { get; protected set; }
         protected bool isMouseInside;
+        protected Animator animator;
 
         protected void Start()
         {
             Instance = this;
             //todo add check for multiple objects with that script
+            animator = GetComponent<Animator>();
         }
 
         /// <summary>
@@ -34,12 +33,29 @@ namespace Nashet.UnityUIUtils
             Instance.Show();
         }
 
+        public override void Show()
+        {
+            animator.Play("Opening");
+            animator.SetBool("IsClosed", false);
+            base.Show();            
+        }
+
+        public override void Hide()
+        {
+            animator.SetBool("IsClosed", true);            
+        }
+
+
         // Update is called once per frame
         protected void Update()
         {
             // close if clicked outside
             if (Input.GetMouseButtonUp(0) && !isMouseInside)
                 Hide();
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Finished"))
+            {
+                base.Hide();
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
